@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VUTProjectApp.Data;
+using VUTProjectApp.Dto;
 using VUTProjectApp.Models;
 
 namespace VUTProjectApp.Controllers
@@ -12,24 +13,28 @@ namespace VUTProjectApp.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryAPIRepo repository;
+        private readonly IMapper mapper;
 
-        public CategoryController(ICategoryAPIRepo repository)
+        public CategoryController(ICategoryAPIRepo repository, IMapper mapper)
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Category>>> GetAllCategory()
+        public async Task<ActionResult<List<CategoryDto>>> GetAllCategory()
         {
             var categories = await repository.GetAllCategory();
-            return Ok(categories);
+            var categoriesDto = mapper.Map<List<CategoryDto>>(categories);
+            return Ok(categoriesDto);
         }
 
         [HttpGet("Id")]
-        public async Task<ActionResult<Category>> GetCategoryById([FromQuery] int id)
+        public async Task<ActionResult<CategoryDto>> GetCategoryById([FromQuery] int id)
         {
             var category = await repository.GetCategoryById(id);
-            return category;
+            var categoryDto = mapper.Map<CategoryDto>(category);
+            return Ok(categoryDto);
         }
     }
 }
