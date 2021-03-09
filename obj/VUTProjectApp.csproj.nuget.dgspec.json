@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\soshi\\source\\repos\\VUTProjectApp\\VUTProjectApp.csproj": {}
+    "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\VUTProjectApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\soshi\\source\\repos\\VUTProjectApp\\VUTProjectApp.csproj": {
+    "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\VUTProjectApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\soshi\\source\\repos\\VUTProjectApp\\VUTProjectApp.csproj",
+        "projectUniqueName": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\VUTProjectApp.csproj",
         "projectName": "VUTProjectApp",
-        "projectPath": "C:\\Users\\soshi\\source\\repos\\VUTProjectApp\\VUTProjectApp.csproj",
-        "packagesPath": "C:\\Users\\soshi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\soshi\\source\\repos\\VUTProjectApp\\obj\\",
+        "projectPath": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\VUTProjectApp.csproj",
+        "packagesPath": "C:\\Users\\Soshik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\soshi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Soshik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,22 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -57,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
