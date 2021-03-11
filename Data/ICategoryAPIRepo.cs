@@ -10,5 +10,9 @@ namespace VUTProjectApp.Data
     {
         Task<List<Category>> GetAllCategory();
         Task<Category> GetCategoryById(int id);
+        void CreateCategory(Category category);
+        void UpdateCategory(Category category);
+        void DeleteCategory(Category category);
+        bool SaveChanges();
     }
 }

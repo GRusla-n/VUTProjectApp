@@ -8,6 +8,8 @@ namespace VUTProjectApp.Dto
         public AppProfile()
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryCreateDto, Category>();
+            
         }
     }
 }

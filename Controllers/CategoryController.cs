@@ -26,15 +26,56 @@ namespace VUTProjectApp.Controllers
         {
             var categories = await repository.GetAllCategory();
             var categoriesDto = mapper.Map<List<CategoryDto>>(categories);
-            return Ok(categoriesDto);
+            return categoriesDto;
         }
 
-        [HttpGet("Id")]
-        public async Task<ActionResult<CategoryDto>> GetCategoryById([FromQuery] int id)
+        [HttpGet("{id}", Name= "GetCategoryById")]
+        public async Task<ActionResult<CategoryDto>> GetCategoryById([FromRoute]int id)
         {
             var category = await repository.GetCategoryById(id);
+            if(category == null)
+            {
+                return NotFound();
+            }
             var categoryDto = mapper.Map<CategoryDto>(category);
-            return Ok(categoryDto);
+            return categoryDto;
+        }
+
+        [HttpPost]
+        public ActionResult<CategoryDto> CreateCategory([FromBody] CategoryCreateDto categoryCreateDto)
+        {
+            var category = mapper.Map<Category>(categoryCreateDto);
+            repository.CreateCategory(category);
+            repository.SaveChanges();
+            var caregoryDto = mapper.Map<CategoryDto>(category);
+            return CreatedAtRoute(nameof(GetCategoryById), new { caregoryDto.Id }, caregoryDto);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateCategory(int id, CategoryCreateDto categoryCreateDto)
+        {
+            var categoryFromRepo = repository.GetCategoryById(id);
+            if (categoryFromRepo == null)
+            {
+                return NotFound();
+            }            
+            mapper.Map(categoryCreateDto, categoryFromRepo.Result);            
+            repository.UpdateCategory(categoryFromRepo.Result);
+            repository.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCategory(int id)
+        {
+            var categoryFromRepo = repository.GetCategoryById(id);
+            if(categoryFromRepo == null)
+            {
+                return NotFound();
+            }
+            repository.DeleteCategory(categoryFromRepo.Result);
+            repository.SaveChanges();
+            return NoContent();
         }
     }
 }

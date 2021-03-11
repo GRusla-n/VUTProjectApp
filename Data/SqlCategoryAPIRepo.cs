@@ -24,5 +24,33 @@ namespace VUTProjectApp.Data
         {
             return await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public void CreateCategory(Category category)
+        {
+            if(category == null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+            context.Categories.Add(category);
+        }
+
+        public bool SaveChanges()
+        {
+            return (context.SaveChanges() >= 0);
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            //We don't need to do anything here
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            if(category == null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+            context.Categories.Remove(category);
+        }
     }
 }
