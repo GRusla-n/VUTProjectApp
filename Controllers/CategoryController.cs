@@ -68,6 +68,7 @@ namespace VUTProjectApp.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteCategory(int id)
         {
+            //Some changes
             var categoryFromRepo = repository.GetCategoryById(id);
             if(categoryFromRepo == null)
             {
