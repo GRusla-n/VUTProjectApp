@@ -280,3 +280,5 @@ C:\Users\Soshik\source\repos\GRusla-n\VUTProjectApp\tests\obj\Debug\net5.0\VUTAp
 C:\Users\Soshik\source\repos\GRusla-n\VUTProjectApp\tests\obj\Debug\net5.0\ref\VUTAppProjectTests.dll
 C:\Users\Soshik\source\repos\GRusla-n\VUTProjectApp\tests\obj\Debug\net5.0\VUTAppProjectTests.pdb
 C:\Users\Soshik\source\repos\GRusla-n\VUTProjectApp\tests\obj\Debug\net5.0\VUTAppProjectTests.genruntimeconfig.cache
+C:\Users\Soshik\Source\Repos\GRusla-n\VUTProjectApp\tests\bin\Debug\net5.0\Npgsql.dll
+C:\Users\Soshik\Source\Repos\GRusla-n\VUTProjectApp\tests\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

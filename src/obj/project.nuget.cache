@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GzNWh7OA5I5V1DF3B31D2zqxSfd4tJ6yrrv+Yi8HyyzOcsLuRoqTciCb2HIVeYxHG1Ewl4SFYZDwJ6EnXcsHFA==",
+  "dgSpecHash": "mpgIt7PMvAje6a6xZUylmSC3arNCG/Euvp1pn2900YnSTvC2iRESSPkWVG37WaLJvGAzb9BT4I+SLpFZOimEFQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Soshik\\source\\repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj",
+  "projectFilePath": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Soshik\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
@@ -37,6 +37,8 @@
     "C:\\Users\\Soshik\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
+    "C:\\Users\\Soshik\\.nuget\\packages\\npgsql\\5.0.2\\npgsql.5.0.2.nupkg.sha512",
+    "C:\\Users\\Soshik\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\5.0.2\\npgsql.entityframeworkcore.postgresql.5.0.2.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
@@ -77,6 +79,7 @@
     "C:\\Users\\Soshik\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",
+    "C:\\Users\\Soshik\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.6.0\\system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
     "C:\\Users\\Soshik\\.nuget\\packages\\system.runtime.interopservices\\4.3.0\\system.runtime.interopservices.4.3.0.nupkg.sha512",

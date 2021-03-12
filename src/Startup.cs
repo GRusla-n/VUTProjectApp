@@ -5,12 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using AutoMapper;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using VUTProjectApp.Data;
 
 namespace VUTProjectApp
@@ -26,16 +21,16 @@ namespace VUTProjectApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+                opt.UseNpgsql(Configuration.GetConnectionString("PostgreSqlConnection")));
             services.AddScoped<ICategoryAPIRepo, SqlCategoryAPIRepo>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
         {
+            context.Database.Migrate();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
