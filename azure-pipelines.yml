@@ -15,7 +15,7 @@ steps:
   displayName: 'dotnet test'
   inputs:
     command: test
-    projects: '**/*Tests/*.csproj'
+    projects: 'tests/*.csproj'
     testRunTitle: 'xUNit Test Run'
 
 - task: DotNetCoreCLI@2
