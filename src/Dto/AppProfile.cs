@@ -9,7 +9,9 @@ namespace VUTProjectApp.Dto
         {
             CreateMap<Category, CategoryDto>();
             CreateMap<CategoryCreateDto, Category>();
-            
+            CreateMap<Product, ProductDto>();
+            CreateMap<ProductCreateDto, Product>();
+
         }
     }
 }

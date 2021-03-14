@@ -116,3 +116,7 @@ C:\Users\Soshik\source\repos\GRusla-n\VUTProjectApp\src\obj\Debug\net5.0\VUTProj
 C:\Users\Soshik\source\repos\GRusla-n\VUTProjectApp\src\obj\Debug\net5.0\VUTProjectApp.genruntimeconfig.cache
 C:\Users\Soshik\Source\Repos\GRusla-n\VUTProjectApp\src\bin\Debug\net5.0\Npgsql.dll
 C:\Users\Soshik\Source\Repos\GRusla-n\VUTProjectApp\src\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Soshik\Source\Repos\GRusla-n\VUTProjectApp\src\bin\Debug\net5.0\Azure.Core.dll
+C:\Users\Soshik\Source\Repos\GRusla-n\VUTProjectApp\src\bin\Debug\net5.0\Azure.Storage.Blobs.dll
+C:\Users\Soshik\Source\Repos\GRusla-n\VUTProjectApp\src\bin\Debug\net5.0\Azure.Storage.Common.dll
+C:\Users\Soshik\Source\Repos\GRusla-n\VUTProjectApp\src\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll

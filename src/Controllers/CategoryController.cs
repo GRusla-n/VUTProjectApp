@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using VUTProjectApp.Abstractions;
 using VUTProjectApp.Data;
 using VUTProjectApp.Dto;
 using VUTProjectApp.Models;
@@ -12,10 +13,10 @@ namespace VUTProjectApp.Controllers
     [ApiController]
     public class CategoryController : Controller
     {
-        private readonly ICategoryAPIRepo repository;
+        private readonly ICategoryRepo repository;
         private readonly IMapper mapper;
 
-        public CategoryController(ICategoryAPIRepo repository, IMapper mapper)
+        public CategoryController(ICategoryRepo repository, IMapper mapper)
         {
             this.repository = repository;
             this.mapper = mapper;
@@ -24,7 +25,7 @@ namespace VUTProjectApp.Controllers
         [HttpGet]
         public async Task<ActionResult<List<CategoryDto>>> GetAllCategory()
         {
-            var categories = await repository.GetAllCategory();
+            var categories = await repository.GetAll();
             var categoriesDto = mapper.Map<List<CategoryDto>>(categories);
             return categoriesDto;
         }
@@ -32,7 +33,7 @@ namespace VUTProjectApp.Controllers
         [HttpGet("{id}", Name= "GetCategoryById")]
         public async Task<ActionResult<CategoryDto>> GetCategoryById([FromRoute]int id)
         {
-            var category = await repository.GetCategoryById(id);
+            var category = await repository.GetById(id);
             if(category == null)
             {
                 return NotFound();
@@ -45,7 +46,7 @@ namespace VUTProjectApp.Controllers
         public ActionResult<CategoryDto> CreateCategory([FromBody] CategoryCreateDto categoryCreateDto)
         {
             var category = mapper.Map<Category>(categoryCreateDto);
-            repository.CreateCategory(category);
+            repository.Create(category);
             repository.SaveChanges();
             var caregoryDto = mapper.Map<CategoryDto>(category);
             return CreatedAtRoute(nameof(GetCategoryById), new { caregoryDto.Id }, caregoryDto);
@@ -54,13 +55,13 @@ namespace VUTProjectApp.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateCategory(int id, CategoryCreateDto categoryCreateDto)
         {
-            var categoryFromRepo = repository.GetCategoryById(id);
+            var categoryFromRepo = repository.GetById(id);
             if (categoryFromRepo == null)
             {
                 return NotFound();
             }            
             mapper.Map(categoryCreateDto, categoryFromRepo.Result);            
-            repository.UpdateCategory(categoryFromRepo.Result);
+            repository.Update(categoryFromRepo.Result);
             repository.SaveChanges();
             return NoContent();
         }
@@ -69,12 +70,12 @@ namespace VUTProjectApp.Controllers
         public ActionResult DeleteCategory(int id)
         {
             //Some changes
-            var categoryFromRepo = repository.GetCategoryById(id);
+            var categoryFromRepo = repository.GetById(id);
             if(categoryFromRepo == null)
             {
                 return NotFound();
             }
-            repository.DeleteCategory(categoryFromRepo.Result);
+            repository.Delete(categoryFromRepo.Result);
             repository.SaveChanges();
             return NoContent();
         }

@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using VUTProjectApp.Abstractions;
 using VUTProjectApp.Data;
+using VUTProjectApp.Implementation;
+using VUTProjectApp.Services;
 
 namespace VUTProjectApp
 {
@@ -24,8 +26,10 @@ namespace VUTProjectApp
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>(opt =>
                 opt.UseNpgsql(Configuration.GetConnectionString("PostgreSqlConnection")));
-            services.AddScoped<ICategoryAPIRepo, SqlCategoryAPIRepo>();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<ICategoryRepo, CategoryRepo>();
+            services.AddScoped<IProductRepo, ProductRepo>();
+            services.AddTransient<IFileStorage, AzureStorage>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
