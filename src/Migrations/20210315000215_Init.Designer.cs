@@ -9,8 +9,8 @@ using VUTProjectApp.Data;
 namespace VUTProjectApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210314234415_AddProduct")]
-    partial class AddProduct
+    [Migration("20210315000215_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
