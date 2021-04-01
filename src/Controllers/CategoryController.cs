@@ -33,7 +33,7 @@ namespace VUTProjectApp.Controllers
         [HttpGet("{id}", Name= "GetCategoryById")]
         public async Task<ActionResult<CategoryDto>> GetCategoryById([FromRoute]int id)
         {
-            var category = await repository.GetById(id, x => x.Id == id);
+            var category = await repository.GetById(x => x.Id == id);
             if(category == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace VUTProjectApp.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateCategory(int id, CategoryCreateDto categoryCreateDto)
         {
-            var categoryFromRepo = repository.GetById(id, x => x.Id == id);
+            var categoryFromRepo = repository.GetById(x => x.Id == id);
             if (categoryFromRepo == null)
             {
                 return NotFound();
@@ -70,7 +70,7 @@ namespace VUTProjectApp.Controllers
         public ActionResult DeleteCategory(int id)
         {
             //Some changes
-            var categoryFromRepo = repository.GetById(id, x => x.Id == id);
+            var categoryFromRepo = repository.GetById(x => x.Id == id);
             if(categoryFromRepo == null)
             {
                 return NotFound();

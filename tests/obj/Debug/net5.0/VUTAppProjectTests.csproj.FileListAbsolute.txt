@@ -430,3 +430,7 @@ C:\Users\soshi\source\repos\GRusla-n\VUTProjectApp\tests\obj\Debug\net5.0\VUTApp
 C:\Users\soshi\source\repos\GRusla-n\VUTProjectApp\tests\obj\Debug\net5.0\ref\VUTAppProjectTests.dll
 C:\Users\soshi\source\repos\GRusla-n\VUTProjectApp\tests\obj\Debug\net5.0\VUTAppProjectTests.pdb
 C:\Users\soshi\source\repos\GRusla-n\VUTProjectApp\tests\obj\Debug\net5.0\VUTAppProjectTests.genruntimeconfig.cache
+C:\Users\soshi\source\repos\GRusla-n\VUTProjectApp\tests\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\soshi\source\repos\GRusla-n\VUTProjectApp\tests\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\soshi\source\repos\GRusla-n\VUTProjectApp\tests\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\soshi\source\repos\GRusla-n\VUTProjectApp\tests\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll

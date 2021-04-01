@@ -20,7 +20,7 @@ namespace VUTProjectApp.Data
             return await db.Set<TEntity>().ToListAsync();
         }        
 
-        async public Task<TEntity> GetById(int id, Expression<Func<TEntity, bool>> filterExpression, Expression<Func<TEntity, object>> include = null)
+        async public Task<TEntity> GetById(Expression<Func<TEntity, bool>> filterExpression, Expression<Func<TEntity, object>> include = null)
         {
             if(include != null)
             {

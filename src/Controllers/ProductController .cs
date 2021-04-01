@@ -40,7 +40,7 @@ namespace VUTProjectApp.Controllers
         [HttpGet("{id}", Name= "GetProductById")]
         public async Task<ActionResult<ProductDto>> GetProductById([FromRoute]int id)
         {
-            var product = await repository.GetById(id, x=>x.Id==id, y=>y.Category);
+            var product = await repository.GetById(x=>x.Id==id, y=>y.Category);
             if(product == null)
             {
                 return NotFound();
@@ -70,7 +70,7 @@ namespace VUTProjectApp.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateProduct(int id, ProductCreateDto productCreateDto)
         {
-            var productFromRepo = repository.GetById(id, x => x.Id == id, y => y.Category);
+            var productFromRepo = repository.GetById(x => x.Id == id, y => y.Category);
             if (productFromRepo == null)
             {
                 return NotFound();
@@ -84,7 +84,7 @@ namespace VUTProjectApp.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(int id)
         {            
-            var productFromRepo = repository.GetById(id, x => x.Id == id, y => y.Category);
+            var productFromRepo = repository.GetById(x => x.Id == id, y => y.Category);
             if(productFromRepo == null)
             {
                 return NotFound();

@@ -4,6 +4,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VUTProjectApp.Abstractions;
 using VUTProjectApp.Controllers;
@@ -44,7 +45,7 @@ namespace VUTAppProjectTests
         public async void GetGategories_ReturnListOfCategory_WhenDBIsNotEmpty()
         {                    
             mockRepo
-                .Setup(repo => repo.GetAll())
+                .Setup(repo => repo.GetAll(null))
                 .Returns(() => Task.FromResult(mockData));      
 
             var categoryController = new CategoryController(mockRepo.Object, mapper);
@@ -54,9 +55,9 @@ namespace VUTAppProjectTests
 
         [Fact]
         public async void GetGategoryById_Returns404NotFound_WhenNonExistentIDProvider()
-        {            
+        {
             mockRepo
-                .Setup(repo => repo.GetById(0))
+                .Setup(repo => repo.GetById(x=>x.Id == 0, null))
                 .Returns(() => null);
 
             var categoryController = new CategoryController(mockRepo.Object, mapper);
@@ -74,7 +75,7 @@ namespace VUTAppProjectTests
                 Name = "Test"
             });
             mockRepo
-                .Setup(repo => repo.GetById(1)) 
+                .Setup(repo => repo.GetById(x => x.Id == 1, null))
                 .Returns(() => Task.FromResult(mockData[0]));
 
             var categoryController = new CategoryController(mockRepo.Object, mapper);
@@ -91,7 +92,7 @@ namespace VUTAppProjectTests
                 Id = 0,
                 Name = "test"
             });
-            mockRepo.Setup(repo => repo.GetById(1))
+            mockRepo.Setup(repo => repo.GetById(x => x.Id == 1, null))
                 .Returns(Task.FromResult(mockData[0]));
             var controller = new CategoryController(mockRepo.Object, mapper);
 
@@ -109,7 +110,7 @@ namespace VUTAppProjectTests
                 Id = 0,
                 Name = "test"
             });
-            mockRepo.Setup(repo => repo.GetById(1))
+            mockRepo.Setup(repo => repo.GetById(x => x.Id == 1, null))
                 .Returns(Task.FromResult(mockData[0]));
             var controller = new CategoryController(mockRepo.Object, mapper);
 
@@ -127,7 +128,7 @@ namespace VUTAppProjectTests
                 Name = "Test"
             });
             mockRepo
-                .Setup(repo => repo.GetById(1))
+                .Setup(repo => repo.GetById(x => x.Id == 1, null))
                 .Returns(() => Task.FromResult(mockData[0]));
             var controller = new CategoryController(mockRepo.Object, mapper);
 
@@ -140,7 +141,7 @@ namespace VUTAppProjectTests
         public void UpdateCategory_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             mockRepo
-                .Setup(repo => repo.GetById(1))
+                .Setup(repo => repo.GetById(x => x.Id == 1, null))
                 .Returns(() => null);
             var controller = new CategoryController(mockRepo.Object, mapper);
 
@@ -158,7 +159,7 @@ namespace VUTAppProjectTests
                 Name = "Test"
             });
             mockRepo
-                .Setup(repo => repo.GetById(1))
+                .Setup(repo => repo.GetById(x => x.Id == 1, null))
                 .Returns(() => Task.FromResult(mockData[0]));
             var controller = new CategoryController(mockRepo.Object, mapper);
             
@@ -171,7 +172,7 @@ namespace VUTAppProjectTests
         public void DeleteCommand_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {            
             mockRepo
-                .Setup(repo => repo.GetById(0))
+                .Setup(repo => repo.GetById(x => x.Id == 0, null))
                 .Returns(() => null);
             var controller = new CategoryController(mockRepo.Object, mapper);
 
