@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\tests\\VUTAppProjectTests.csproj": {}
+    "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\tests\\VUTAppProjectTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj": {
+    "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj",
+        "projectUniqueName": "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj",
         "projectName": "VUTProjectApp",
-        "projectPath": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj",
-        "packagesPath": "C:\\Users\\Soshik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\src\\obj\\",
+        "projectPath": "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj",
+        "packagesPath": "C:\\Users\\soshi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\src\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Soshik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\soshi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -65,6 +65,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.1.1, )"
             }
           },
           "imports": [
@@ -85,21 +89,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\tests\\VUTAppProjectTests.csproj": {
+    "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\tests\\VUTAppProjectTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\tests\\VUTAppProjectTests.csproj",
+        "projectUniqueName": "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\tests\\VUTAppProjectTests.csproj",
         "projectName": "VUTAppProjectTests",
-        "projectPath": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\tests\\VUTAppProjectTests.csproj",
-        "packagesPath": "C:\\Users\\Soshik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\tests\\obj\\",
+        "projectPath": "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\tests\\VUTAppProjectTests.csproj",
+        "packagesPath": "C:\\Users\\soshi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Soshik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\soshi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -113,8 +117,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj": {
-                "projectPath": "C:\\Users\\Soshik\\Source\\Repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj"
+              "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj": {
+                "projectPath": "C:\\Users\\soshi\\source\\repos\\GRusla-n\\VUTProjectApp\\src\\VUTProjectApp.csproj"
               }
             }
           }
@@ -169,11 +173,14 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

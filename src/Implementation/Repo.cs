@@ -2,23 +2,33 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using VUTProjectApp.Extension;
 using VUTProjectApp.Models;
 
 namespace VUTProjectApp.Data
 {
     public class Repo<TEntity> : IRepo<TEntity> where TEntity : class
     {
-        protected DbContext db { get; set; }        
+        protected DbContext db { get; set; }
 
-        async public Task<List<TEntity>> GetAll()
-        {
-            return db.Set<TEntity>().ToList();
-        }
+        async public Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> include=null)
+        {                    
+            if (include != null)
+            {
+                return await db.Set<TEntity>().Include(include).ToListAsync();
+            }
+            return await db.Set<TEntity>().ToListAsync();
+        }        
 
-        async public Task<TEntity> GetById(int id)
+        async public Task<TEntity> GetById(int id, Expression<Func<TEntity, bool>> filterExpression, Expression<Func<TEntity, object>> include = null)
         {
-            return db.Set<TEntity>().Find(id);
+            if(include != null)
+            {
+                return await db.Set<TEntity>().Include(include).FirstOrDefaultAsync(filterExpression);
+            }
+            return await db.Set<TEntity>().FirstOrDefaultAsync(filterExpression);
         }
 
         public void Create(TEntity model)

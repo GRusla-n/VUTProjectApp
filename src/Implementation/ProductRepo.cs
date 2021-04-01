@@ -13,6 +13,8 @@ namespace VUTProjectApp.Implementation
         public ProductRepo(ApplicationDbContext db)
         {
             this.db = db;
-        }
+        }   
+        
     }
 }
+

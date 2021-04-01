@@ -29,7 +29,8 @@ namespace VUTProjectApp
             services.AddScoped<ICategoryRepo, CategoryRepo>();
             services.AddScoped<IProductRepo, ProductRepo>();
             services.AddTransient<IFileStorage, AzureStorage>();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());            
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
@@ -39,6 +40,13 @@ namespace VUTProjectApp
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(x =>
+            {
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                x.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 

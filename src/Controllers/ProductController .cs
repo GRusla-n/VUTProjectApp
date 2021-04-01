@@ -8,6 +8,7 @@ using VUTProjectApp.Services;
 using VUTProjectApp.Abstractions;
 using VUTProjectApp.Dto;
 using VUTProjectApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace VUTProjectApp.Controllers
 {
@@ -30,7 +31,8 @@ namespace VUTProjectApp.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ProductDto>>> GetAllProducts()
         {
-            var products = await repository.GetAll();
+            var products = await repository.GetAll(x => x.Category);
+
             var productsDto = mapper.Map<List<ProductDto>>(products);
             return productsDto;
         }
@@ -38,7 +40,7 @@ namespace VUTProjectApp.Controllers
         [HttpGet("{id}", Name= "GetProductById")]
         public async Task<ActionResult<ProductDto>> GetProductById([FromRoute]int id)
         {
-            var product = await repository.GetById(id);
+            var product = await repository.GetById(id, x=>x.Id==id, y=>y.Category);
             if(product == null)
             {
                 return NotFound();
@@ -51,14 +53,14 @@ namespace VUTProjectApp.Controllers
         public async Task<ActionResult<ProductDto>> CreateProduct([FromForm] ProductCreateDto productCreateDto)
         {               
             var product = mapper.Map<Product>(productCreateDto);
-            using (var memoryStream = new MemoryStream())
-            {
-                await productCreateDto.Image.CopyToAsync(memoryStream);
-                var content = memoryStream;
-                var extension = Path.GetExtension(productCreateDto.Image.FileName);
-                product.Image =
-                    await fileStorage.SaveFile(content, extension, containerName);
-            }
+            //using (var memoryStream = new MemoryStream())
+            //{
+            //    await productCreateDto.Image.CopyToAsync(memoryStream);
+            //    var content = memoryStream;
+            //    var extension = Path.GetExtension(productCreateDto.Image.FileName);
+            //    product.Image =
+            //        await fileStorage.SaveFile(content, extension, containerName);
+            //}
             repository.Create(product);
             repository.SaveChanges();
             var productDto = mapper.Map<ProductDto>(product);
@@ -68,7 +70,7 @@ namespace VUTProjectApp.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateProduct(int id, ProductCreateDto productCreateDto)
         {
-            var productFromRepo = repository.GetById(id);
+            var productFromRepo = repository.GetById(id, x => x.Id == id, y => y.Category);
             if (productFromRepo == null)
             {
                 return NotFound();
@@ -82,7 +84,7 @@ namespace VUTProjectApp.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(int id)
         {            
-            var productFromRepo = repository.GetById(id);
+            var productFromRepo = repository.GetById(id, x => x.Id == id, y => y.Category);
             if(productFromRepo == null)
             {
                 return NotFound();
