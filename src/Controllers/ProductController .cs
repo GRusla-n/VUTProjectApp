@@ -19,7 +19,7 @@ namespace VUTProjectApp.Controllers
         private readonly IProductRepo repository;
         private readonly IMapper mapper;
         private readonly IFileStorage fileStorage;
-        private readonly string containerName = "products";        
+        private readonly string containerName = "products";
 
         public ProductController(IProductRepo repository, IMapper mapper, IFileStorage fileStorage)
         {
@@ -53,16 +53,16 @@ namespace VUTProjectApp.Controllers
         public async Task<ActionResult<ProductDto>> CreateProduct([FromForm] ProductCreateDto productCreateDto)
         {               
             var product = mapper.Map<Product>(productCreateDto);
-            //using (var memoryStream = new MemoryStream())
-            //{
-            //    await productCreateDto.Image.CopyToAsync(memoryStream);
-            //    var content = memoryStream;
-            //    var extension = Path.GetExtension(productCreateDto.Image.FileName);
-            //    product.Image =
-            //        await fileStorage.SaveFile(content, extension, containerName);
-            //}
+            using (var memoryStream = new MemoryStream())
+            {
+                await productCreateDto.Image.CopyToAsync(memoryStream);
+                var content = memoryStream;
+                var extension = Path.GetExtension(productCreateDto.Image.FileName);
+                product.Image =
+                    await fileStorage.SaveFile(content, extension, containerName);
+            }
             repository.Create(product);
-            repository.SaveChanges();
+            repository.SaveChangesAsync();
             var productDto = mapper.Map<ProductDto>(product);
             return CreatedAtRoute(nameof(GetProductById), new { productDto.Id }, productDto);
         }

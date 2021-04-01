@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using VUTProjectApp.Extension;
-using VUTProjectApp.Models;
+
 
 namespace VUTProjectApp.Data
 {
@@ -43,6 +41,11 @@ namespace VUTProjectApp.Data
         public bool SaveChanges()
         {
             return (db.SaveChanges() >= 0);
+        }
+
+        public bool SaveChangesAsync()
+        {
+            return (db.SaveChangesAsync().Result >= 0);
         }
 
         public void Update(TEntity model)

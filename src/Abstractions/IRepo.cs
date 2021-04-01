@@ -16,5 +16,6 @@ namespace VUTProjectApp.Data
         void Update(TEntity category);
         void Delete(TEntity category);
         bool SaveChanges();
+        bool SaveChangesAsync();
     }
 }
