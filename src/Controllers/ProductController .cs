@@ -40,7 +40,7 @@ namespace VUTProjectApp.Controllers
         [HttpGet("{id}", Name= "GetProductById")]
         public async Task<ActionResult<ProductDto>> GetProductById([FromRoute]int id)
         {
-            var product = await repository.GetById(x=>x.Id==id, y=>y.Category);
+            var product = await repository.GetById(x=>x.Id==id, y=>y.Category, z => z.Ratings);
             if(product == null)
             {
                 return NotFound();
@@ -72,29 +72,45 @@ namespace VUTProjectApp.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateProduct(int id, ProductCreateDto productCreateDto)
+        public async Task<ActionResult> UpdateProduct(int id, ProductCreateDto productCreateDto)
         {
-            var productFromRepo = repository.GetById(x => x.Id == id, y => y.Category);
+            var productFromRepo = repository.GetById(x => x.Id == id);
+
             if (productFromRepo == null)
             {
                 return NotFound();
-            }            
-            mapper.Map(productCreateDto, productFromRepo.Result);            
-            repository.Update(productFromRepo.Result);
-            repository.SaveChanges();
-            return NoContent();
-        }
+            }
+
+            if (productCreateDto.Image != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await productCreateDto.Image.CopyToAsync(memoryStream);
+                    var content = memoryStream;
+                    var extension = Path.GetExtension(productCreateDto.Image.FileName);
+                    var fileRoute = productFromRepo.Result.Image;
+                    productFromRepo.Result.Image =
+                        await fileStorage.EditFile(content, extension, containerName, fileRoute);
+                }
+            }
+
+                mapper.Map(productCreateDto, productFromRepo.Result);
+                repository.Update(productFromRepo.Result);
+                repository.SaveChangesAsync();
+                return NoContent();
+            }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteProduct(int id)
+        public async Task<ActionResult> DeleteProduct(int id)
         {            
             var productFromRepo = repository.GetById(x => x.Id == id, y => y.Category);
             if(productFromRepo == null)
             {
                 return NotFound();
             }
+            await fileStorage.DeleteFile(productFromRepo.Result.Image, containerName);
             repository.Delete(productFromRepo.Result);
-            repository.SaveChanges();
+            repository.SaveChangesAsync();
             return NoContent();
         }
     }

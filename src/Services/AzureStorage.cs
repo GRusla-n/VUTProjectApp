@@ -17,14 +17,19 @@ namespace VUTProjectApp.Services
         }       
 
         
-        public Task<string> EditFile(MemoryStream content, string extension, string containerName, string fileRoute)
+        public async Task<string> EditFile(MemoryStream content, string extension, string containerName, string fileRoute)
         {
-            throw new NotImplementedException();
+            await DeleteFile(fileRoute, containerName);
+            return await SaveFile(content, extension, containerName);
+
         }
 
-        public Task DeleteFile(string fileRoute, string containerName)
+        public async Task DeleteFile(string fileRoute, string containerName)
         {
-            throw new NotImplementedException();
+            BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
+            var blobName = Path.GetFileName(fileRoute);
+            var blob = container.GetBlobClient(blobName);
+            await blob.DeleteIfExistsAsync();
         }
 
         public async Task<string> SaveFile(MemoryStream content, string extension, string containerName)
