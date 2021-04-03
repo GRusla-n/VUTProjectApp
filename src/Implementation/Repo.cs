@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-
+using VUTProjectApp.Extension;
 
 namespace VUTProjectApp.Data
 {
@@ -11,20 +12,20 @@ namespace VUTProjectApp.Data
     {
         protected DbContext db { get; set; }
 
-        async public Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> include=null)
-        {                    
-            if (include != null)
+        async public Task<List<TEntity>> GetAll(params Expression<Func<TEntity, object>>[] includes)
+        {               
+            if (includes != null)
             {
-                return await db.Set<TEntity>().Include(include).ToListAsync();
+                return await includes.Aggregate(db.Set<TEntity>().AsQueryable(), (current, include) => current.Include(include)).ToListAsync();
             }
             return await db.Set<TEntity>().ToListAsync();
         }        
 
-        async public Task<TEntity> GetById(Expression<Func<TEntity, bool>> filterExpression, Expression<Func<TEntity, object>> include = null)
+        async public Task<TEntity> GetById(Expression<Func<TEntity, bool>> filterExpression, params Expression<Func<TEntity, object>>[] includes)
         {
-            if(include != null)
+            if (includes != null)
             {
-                return await db.Set<TEntity>().Include(include).FirstOrDefaultAsync(filterExpression);
+                var result = includes.Aggregate(db.Set<TEntity>(), (current, include) => (DbSet<TEntity>)current.Include(include));
             }
             return await db.Set<TEntity>().FirstOrDefaultAsync(filterExpression);
         }

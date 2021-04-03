@@ -28,6 +28,7 @@ namespace VUTProjectApp
                 opt.UseNpgsql(Configuration.GetConnectionString("PostgreSqlConnection")));
             services.AddScoped<ICategoryRepo, CategoryRepo>();
             services.AddScoped<IProductRepo, ProductRepo>();
+            services.AddScoped<IProducerRepo, ProducerRepo>();
             services.AddTransient<IFileStorage, AzureStorage>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen();

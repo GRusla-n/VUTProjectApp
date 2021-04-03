@@ -19,5 +19,10 @@ namespace VUTProjectApp.Models
         
         public int CategoryId {get; set; }
         public Category Category {get; set; }
+        
+        public int ProducerId { get; set; }
+        public Producer Producer { get; set; }
+
+        public List<Rating> Ratings { get; set; }
     }
 }

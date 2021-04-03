@@ -8,12 +8,11 @@ using VUTProjectApp.Models;
 
 namespace VUTProjectApp.Implementation
 {
-    public class ProductRepo : Repo<Product>, IProductRepo
+    public class ProducerRepo : Repo<Producer>, IProducerRepo
     {
-        public ProductRepo(ApplicationDbContext db)
+        public ProducerRepo(ApplicationDbContext db)
         {
             this.db = db;
-        }        
+        }
     }
 }
-

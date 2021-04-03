@@ -8,17 +8,13 @@ using System.Threading.Tasks;
 
 namespace VUTProjectApp.Dto
 {
-    public class ProductCreateDto
-    {
-        public int Id { get; set; }
+    public class ProducerCreateDto
+    {        
+        [Required]
         public string Name { get; set; }
-
-        [NotMapped]
-        public IFormFile Image { get; set; }
-        public double Weight { get; set; }
         public string Description { get; set; }
-        public double Price { get; set; }
-        public int CategoryId {get; set; }
-        public int ProducerId { get; set; }
+        [NotMapped]
+        public IFormFile Logo { get; set; }
+        public string Country { get; set; }        
     }
 }

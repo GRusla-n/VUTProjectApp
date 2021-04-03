@@ -31,7 +31,7 @@ namespace VUTProjectApp.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ProductDto>>> GetAllProducts()
         {
-            var products = await repository.GetAll(x => x.Category);
+            var products = await repository.GetAll(x => x.Category, y => y.Producer);
 
             var productsDto = mapper.Map<List<ProductDto>>(products);
             return productsDto;
@@ -53,14 +53,18 @@ namespace VUTProjectApp.Controllers
         public async Task<ActionResult<ProductDto>> CreateProduct([FromForm] ProductCreateDto productCreateDto)
         {               
             var product = mapper.Map<Product>(productCreateDto);
-            using (var memoryStream = new MemoryStream())
+            if(productCreateDto.Image != null)
             {
-                await productCreateDto.Image.CopyToAsync(memoryStream);
-                var content = memoryStream;
-                var extension = Path.GetExtension(productCreateDto.Image.FileName);
-                product.Image =
-                    await fileStorage.SaveFile(content, extension, containerName);
+                using (var memoryStream = new MemoryStream())
+                {
+                    await productCreateDto.Image.CopyToAsync(memoryStream);
+                    var content = memoryStream;
+                    var extension = Path.GetExtension(productCreateDto.Image.FileName);
+                    product.Image =
+                        await fileStorage.SaveFile(content, extension, containerName);
+                }
             }
+            
             repository.Create(product);
             repository.SaveChangesAsync();
             var productDto = mapper.Map<ProductDto>(product);
