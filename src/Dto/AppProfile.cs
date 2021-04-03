@@ -13,7 +13,11 @@ namespace VUTProjectApp.Dto
             CreateMap<ProductCreateDto, Product>();
             CreateMap<Producer, ProducerDto>();
             CreateMap<ProducerCreateDto, Producer>();
-            CreateMap<Producer, ProducerForProductDto>();
+            CreateMap<Producer, ProducerForProductDto>(); 
+            CreateMap<Product, ProductForProducerDto>();
+
+            CreateMap<Rating, RatingDto>();
+            CreateMap<RatingCreateDto, Rating>();
 
         }
     }

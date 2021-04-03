@@ -16,5 +16,6 @@ namespace VUTProjectApp.Dto
         public double Price { get; set; }        
         public CategoryDto Category {get; set; }
         public ProducerForProductDto Producer { get; set; }
+        public List<RatingDto> Ratings { get; set; }
     }
 }

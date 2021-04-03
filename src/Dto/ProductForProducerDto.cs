@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace VUTProjectApp.Dto
 {
-    public class ProducerForProductDto
-    {        
-        public int Id { get; set; }
+    public class ProductForProducerDto
+    {
+        public int Id { get; set; }        
         public string Name { get; set; }
     }
 }

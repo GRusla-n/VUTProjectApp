@@ -67,8 +67,35 @@ namespace VUTProjectApp.Controllers
             
             repository.Create(producer);
             repository.SaveChangesAsync();
-            var productDto = mapper.Map<ProducerDto>(producer);
-            return CreatedAtRoute(nameof(GetProducerById), new { productDto.Id }, productDto);
+            var producerDto = mapper.Map<ProducerDto>(producer);
+            return CreatedAtRoute(nameof(GetProducerById), new { producerDto.Id }, producerDto);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateProducer(int id, ProducerCreateDto producerCreateDto)
+        {
+            var producerFromRepo = repository.GetById(x => x.Id == id, y => y.Products);
+            if (producerFromRepo == null)
+            {
+                return NotFound();
+            }
+            mapper.Map(producerCreateDto, producerFromRepo.Result);
+            repository.Update(producerFromRepo.Result);
+            repository.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteProducer(int id)
+        {
+            var productFromRepo = repository.GetById(x => x.Id == id, y => y.Products);
+            if (productFromRepo == null)
+            {
+                return NotFound();
+            }
+            repository.Delete(productFromRepo.Result);
+            repository.SaveChanges();
+            return NoContent();
         }
     }
 }

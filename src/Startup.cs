@@ -29,6 +29,7 @@ namespace VUTProjectApp
             services.AddScoped<ICategoryRepo, CategoryRepo>();
             services.AddScoped<IProductRepo, ProductRepo>();
             services.AddScoped<IProducerRepo, ProducerRepo>();
+            services.AddScoped<IRatingRepo, RatingRepo>();
             services.AddTransient<IFileStorage, AzureStorage>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen();

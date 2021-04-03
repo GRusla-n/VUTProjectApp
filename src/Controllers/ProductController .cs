@@ -31,7 +31,7 @@ namespace VUTProjectApp.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ProductDto>>> GetAllProducts()
         {
-            var products = await repository.GetAll(x => x.Category, y => y.Producer);
+            var products = await repository.GetAll(x => x.Category, y => y.Producer, z => z.Ratings);
 
             var productsDto = mapper.Map<List<ProductDto>>(products);
             return productsDto;

@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace VUTProjectApp.Dto
 {
-    public class ProducerForProductDto
-    {        
+    public class RatingDto
+    {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public int Point { get; set; }
+        public string Description { get; set; }
     }
 }

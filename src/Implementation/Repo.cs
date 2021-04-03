@@ -25,7 +25,7 @@ namespace VUTProjectApp.Data
         {
             if (includes != null)
             {
-                var result = includes.Aggregate(db.Set<TEntity>(), (current, include) => (DbSet<TEntity>)current.Include(include));
+                return await includes.Aggregate(db.Set<TEntity>().AsQueryable(), (current, include) => current.Include(include)).FirstOrDefaultAsync(filterExpression);
             }
             return await db.Set<TEntity>().FirstOrDefaultAsync(filterExpression);
         }

@@ -10,7 +10,7 @@ namespace VUTProjectApp.Dto
 {
     public class ProductCreateDto
     {
-        public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
 
         [NotMapped]
@@ -18,7 +18,9 @@ namespace VUTProjectApp.Dto
         public double Weight { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
+        [Required]
         public int CategoryId {get; set; }
+        [Required]
         public int ProducerId { get; set; }
     }
 }
