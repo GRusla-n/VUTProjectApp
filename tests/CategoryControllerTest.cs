@@ -147,7 +147,7 @@ namespace VUTAppProjectTests
 
             var result = controller.UpdateCategory(1, new CategoryCreateDto());
 
-            Assert.IsType<NotFoundResult>(result);
+            Assert.IsType<NoContentResult>(result);
         }
 
         [Fact]
@@ -178,7 +178,7 @@ namespace VUTAppProjectTests
 
             var result = controller.DeleteCategory(0);
 
-            Assert.IsType<NotFoundResult>(result);
+            Assert.IsType<NoContentResult>(result);
         }
     }
 }
