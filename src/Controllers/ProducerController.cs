@@ -29,9 +29,9 @@ namespace VUTProjectApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProducerDto>>> GetAllProducers()
+        public async Task<ActionResult<List<ProducerDto>>> GetAllProducers([FromQuery] PaginationDto pagination)
         {
-            var producer = await repository.GetAll(x => x.Products);
+            var producer = await repository.GetAll(HttpContext, pagination, x => x.Products);
 
             var producerDto = mapper.Map<List<ProducerDto>>(producer);
             return producerDto;

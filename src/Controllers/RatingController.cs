@@ -25,9 +25,9 @@ namespace VUTProjectApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<RatingDto>>> GetAllRatings()
+        public async Task<ActionResult<List<RatingDto>>> GetAllRatings([FromQuery] PaginationDto pagination)
         {
-            var ratings = await repository.GetAll();
+            var ratings = await repository.GetAll(HttpContext, pagination);
             var ratingsDto = mapper.Map<List<RatingDto>>(ratings);
             return ratingsDto;
         }

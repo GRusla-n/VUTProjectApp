@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
@@ -23,6 +24,8 @@ namespace VUTAppProjectTests
         IMapper mapper;
         List<Product> mockData;
         Mock<IFileStorage> fileStorage;
+        PaginationDto pagination;
+        HttpContext httpContext;
 
 
         public ProductControllerTest()
@@ -32,7 +35,7 @@ namespace VUTAppProjectTests
             configuration = new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
             mapper = new Mapper(configuration);
             mockData = new List<Product>();
-            fileStorage = new Mock<IFileStorage>();
+            fileStorage = new Mock<IFileStorage>();            
         }
 
         public void Dispose()
@@ -43,17 +46,19 @@ namespace VUTAppProjectTests
             realProfile = null;
             mockData = null;
             fileStorage = null;
+            pagination = null;
+            httpContext = null;
         }
 
         [Fact]
         public async void GetProducts_ReturnListOfProducts_WhenDBIsNotEmpty()
         {
             mockRepo
-                .Setup(repo => repo.GetAll(null))
+                .Setup(repo => repo.GetAll(httpContext, pagination))
                 .Returns(() => Task.FromResult(mockData));
 
             var productController = new ProductController(mockRepo.Object, mapper, fileStorage.Object);
-            var result = await productController.GetAllProducts();
+            var result = await productController.GetAllProducts(pagination);
             Assert.IsType<ActionResult<List<ProductDto>>>(result);
         }
     }

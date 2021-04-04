@@ -8,7 +8,6 @@ using VUTProjectApp.Services;
 using VUTProjectApp.Abstractions;
 using VUTProjectApp.Dto;
 using VUTProjectApp.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace VUTProjectApp.Controllers
 {
@@ -29,9 +28,9 @@ namespace VUTProjectApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDto>>> GetAllProducts()
+        public async Task<ActionResult<List<ProductDto>>> GetAllProducts([FromQuery] PaginationDto pagination)
         {
-            var products = await repository.GetAll(x => x.Category, y => y.Producer, z => z.Ratings);
+            var products = await repository.GetAll(HttpContext, pagination, x => x.Category, y => y.Producer, z => z.Ratings);
 
             var productsDto = mapper.Map<List<ProductDto>>(products);
             return productsDto;

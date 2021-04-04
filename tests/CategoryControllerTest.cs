@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
@@ -22,6 +23,8 @@ namespace VUTAppProjectTests
         MapperConfiguration configuration;
         IMapper mapper;
         List<Category> mockData;
+        PaginationDto pagination;
+        HttpContext httpContext;
 
         public CategoryControllerTest()
         {
@@ -30,6 +33,7 @@ namespace VUTAppProjectTests
             configuration = new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
             mapper = new Mapper(configuration);
             mockData = new List<Category>();
+            pagination = new PaginationDto();
         }
 
         public void Dispose()
@@ -39,17 +43,19 @@ namespace VUTAppProjectTests
             configuration = null;
             realProfile = null;
             mockData = null;
+            pagination = null;
+            httpContext = null;
         }
 
         [Fact]
         public async void GetGategories_ReturnListOfCategory_WhenDBIsNotEmpty()
         {                    
             mockRepo
-                .Setup(repo => repo.GetAll(null))
+                .Setup(repo => repo.GetAll(httpContext, pagination))
                 .Returns(() => Task.FromResult(mockData));      
 
             var categoryController = new CategoryController(mockRepo.Object, mapper);
-            var result = await categoryController.GetAllCategory();
+            var result = await categoryController.GetAllCategory(pagination);
             Assert.IsType<ActionResult<List<CategoryDto>>>(result);
         }        
 

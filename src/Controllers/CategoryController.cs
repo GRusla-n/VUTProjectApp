@@ -23,9 +23,9 @@ namespace VUTProjectApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CategoryDto>>> GetAllCategory()
+        public async Task<ActionResult<List<CategoryDto>>> GetAllCategory([FromQuery] PaginationDto pagination)
         {
-            var categories = await repository.GetAll();
+            var categories = await repository.GetAll(HttpContext, pagination);
             var categoriesDto = mapper.Map<List<CategoryDto>>(categories);
             return categoriesDto;
         }
