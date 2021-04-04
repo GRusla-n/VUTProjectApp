@@ -12,7 +12,8 @@ namespace VUTProjectApp.Data
 {
     public interface IRepo<TEntity> where TEntity : class
     {
-        Task<List<TEntity>> GetAll(HttpContext httpContext, PaginationDto pagination, params Expression<Func<TEntity, object>>[] includes);        
+        Task<List<TEntity>> GetAll(HttpContext httpContext, PaginationDto pagination, params Expression<Func<TEntity, object>>[] includes);
+        Task<List<TEntity>> Filter(params Expression<Func<TEntity, bool>>[] filter);
         Task<TEntity> GetById(Expression<Func<TEntity, bool>> filterExpression, params Expression<Func<TEntity, object>>[] includes);
         void Create(TEntity category);
         void Update(TEntity category);

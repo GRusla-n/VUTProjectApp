@@ -16,5 +16,7 @@ namespace VUTProjectApp.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Producer> Producers { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
     }
 }

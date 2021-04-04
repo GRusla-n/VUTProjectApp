@@ -57,7 +57,7 @@ namespace VUTProjectApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producer");
+                    b.ToTable("Producers");
                 });
 
             modelBuilder.Entity("VUTProjectApp.Models.Product", b =>
@@ -121,7 +121,7 @@ namespace VUTProjectApp.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Rating");
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("VUTProjectApp.Models.Product", b =>

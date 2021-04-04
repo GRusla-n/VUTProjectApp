@@ -30,6 +30,14 @@ namespace VUTProjectApp.Controllers
             return categoriesDto;
         }
 
+        [HttpGet("filter")]
+        public async Task<ActionResult<List<CategoryDto>>> Filter([FromQuery] string name)
+        {
+            var filter = await repository.Filter(x => x.Name == name);
+            var filterDto = mapper.Map<List<CategoryDto>>(filter);
+            return filterDto;
+        }
+
         [HttpGet("{id}", Name= "GetCategoryById")]
         public async Task<ActionResult<CategoryDto>> GetCategoryById([FromRoute]int id)
         {
@@ -41,6 +49,7 @@ namespace VUTProjectApp.Controllers
             var categoryDto = mapper.Map<CategoryDto>(category);
             return categoryDto;
         }
+        
 
         [HttpPost]
         public ActionResult<CategoryDto> CreateCategory([FromBody] CategoryCreateDto categoryCreateDto)

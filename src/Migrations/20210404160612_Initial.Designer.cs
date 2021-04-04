@@ -10,7 +10,7 @@ using VUTProjectApp.Data;
 namespace VUTProjectApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210403181551_Initial")]
+    [Migration("20210404160612_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,7 +59,7 @@ namespace VUTProjectApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producer");
+                    b.ToTable("Producers");
                 });
 
             modelBuilder.Entity("VUTProjectApp.Models.Product", b =>
@@ -123,7 +123,7 @@ namespace VUTProjectApp.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Rating");
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("VUTProjectApp.Models.Product", b =>

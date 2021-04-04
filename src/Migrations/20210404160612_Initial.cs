@@ -22,7 +22,7 @@ namespace VUTProjectApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Producer",
+                name: "Producers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -34,7 +34,7 @@ namespace VUTProjectApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Producer", x => x.Id);
+                    table.PrimaryKey("PK_Producers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,15 +62,15 @@ namespace VUTProjectApp.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Producer_ProducerId",
+                        name: "FK_Products_Producers_ProducerId",
                         column: x => x.ProducerId,
-                        principalTable: "Producer",
+                        principalTable: "Producers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rating",
+                name: "Ratings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -81,9 +81,9 @@ namespace VUTProjectApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rating", x => x.Id);
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rating_Products_ProductId",
+                        name: "FK_Ratings_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -101,15 +101,15 @@ namespace VUTProjectApp.Migrations
                 column: "ProducerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rating_ProductId",
-                table: "Rating",
+                name: "IX_Ratings_ProductId",
+                table: "Ratings",
                 column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Rating");
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "Products");
@@ -118,7 +118,7 @@ namespace VUTProjectApp.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Producer");
+                name: "Producers");
         }
     }
 }

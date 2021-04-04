@@ -25,7 +25,19 @@ namespace VUTProjectApp.Data
             }           
 
             return await query.ToListAsync();
-        }        
+        }
+        
+        async public Task<List<TEntity>> Filter (params Expression<Func<TEntity, bool>>[] filter)
+        {
+            var query = db.Set<TEntity>().AsQueryable();
+
+            if (filter != null)
+            {
+                query = filter.Aggregate(query, (current, include) => current.Where(include));
+            }
+
+            return await query.ToListAsync();
+        }
 
         async public Task<TEntity> GetById(Expression<Func<TEntity, bool>> filterExpression, params Expression<Func<TEntity, object>>[] includes)
         {

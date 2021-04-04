@@ -32,6 +32,14 @@ namespace VUTProjectApp.Controllers
             return ratingsDto;
         }
 
+        [HttpGet("filter")]
+        public async Task<ActionResult<List<RatingDto>>> Filter([FromQuery] string name)
+        {
+            var filter = await repository.Filter(x => x.Product.Name == name);
+            var filterDto = mapper.Map<List<RatingDto>>(filter);
+            return filterDto;
+        }
+
         [HttpGet("{id}", Name = "GetRatingById")]
         public async Task<ActionResult<RatingDto>> GetRatingById([FromRoute] int id)
         {

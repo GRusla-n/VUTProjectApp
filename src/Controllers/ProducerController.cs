@@ -37,6 +37,14 @@ namespace VUTProjectApp.Controllers
             return producerDto;
         }
 
+        [HttpGet("filter")]
+        public async Task<ActionResult<List<ProducerDto>>> Filter([FromQuery] string name)
+        {
+            var filter = await repository.Filter(x => x.Name == name);
+            var filterDto = mapper.Map<List<ProducerDto>>(filter);
+            return filterDto;
+        }
+
         [HttpGet("{id}", Name = "GetProducerById")]
         public async Task<ActionResult<ProducerDto>> GetProducerById([FromRoute] int id)
         {
