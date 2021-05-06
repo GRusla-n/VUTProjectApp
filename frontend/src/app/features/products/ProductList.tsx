@@ -1,5 +1,14 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Item, Label, Segment, Rating } from 'semantic-ui-react';
+import React from 'react';
+import {
+  Button,
+  Item,
+  Label,
+  Segment,
+  Rating,
+  Accordion,
+  Icon,
+} from 'semantic-ui-react';
 import { useStore } from '../../stores/store';
 
 const ProductList = () => {
@@ -15,7 +24,13 @@ const ProductList = () => {
               <Item.Header as="a">{product.name}</Item.Header>
               <Item.Meta>{product.price}</Item.Meta>
               <Item.Description>{product.description}</Item.Description>
-              <Rating maxRating={5} />
+              <Accordion>
+                <Accordion.Title>
+                  <Icon name="dropdown" />
+                  <Rating maxRating={5} />
+                </Accordion.Title>
+                <Accordion.Content>Some text</Accordion.Content>
+              </Accordion>
               <Item.Extra>
                 <Button
                   onClick={() => productStore.selectProduct(product.id)}
@@ -23,6 +38,7 @@ const ProductList = () => {
                   content="View"
                 />
                 <Label basic content={product.category.name} />
+                <Label basic content={product.producer.name} />
               </Item.Extra>
             </Item.Content>
           </Item>

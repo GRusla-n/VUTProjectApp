@@ -6,6 +6,9 @@ export interface Category {
 export interface Producer {
   id: string;
   name: string;
+  description: string;
+  logo: string | Blob;
+  country: string;
 }
 
 export interface Rating {

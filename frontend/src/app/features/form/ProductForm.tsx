@@ -27,6 +27,9 @@ const ProductForm = () => {
     producer: {
       id: '',
       name: '',
+      description: '',
+      logo: '',
+      country: '',
     },
     rating: [
       {
@@ -39,8 +42,6 @@ const ProductForm = () => {
   };
 
   const [product, setProduct] = useState(initialState);
-
-  useEffect(() => {}, []);
 
   const handleSubmit = () => {
     product.id ? updateProduct(product) : createProduct(product);
@@ -74,6 +75,18 @@ const ProductForm = () => {
           name="name"
           onChange={handleInputChange}
         />
+        <Form.Input
+          placeholder="Weight"
+          value={product.weight}
+          name="weight"
+          onChange={handleInputChange}
+        />
+        <Form.Input
+          placeholder="Price"
+          value={product.price}
+          name="price"
+          onChange={handleInputChange}
+        />
         <Form.TextArea
           placeholder="Description"
           value={product.description || ''}
@@ -97,7 +110,7 @@ const ProductForm = () => {
           loading={loading}
           floated="right"
           type="submit"
-          content="Create"
+          content={product.id ? 'Update' : 'Create'}
         />
       </Form>
     </Segment>
