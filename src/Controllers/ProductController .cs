@@ -47,7 +47,7 @@ namespace VUTProjectApp.Controllers
         [HttpGet("{id}", Name= "GetProductById")]
         public async Task<ActionResult<ProductDto>> GetProductById([FromRoute]int id)
         {
-            var product = await repository.GetById(x=>x.Id==id, y=>y.Category, z => z.Ratings);
+            var product = await repository.GetById(x=>x.Id==id, y=>y.Category, y => y.Producer,  z => z.Ratings);
             if(product == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace VUTProjectApp.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateProduct(int id, ProductCreateDto productCreateDto)
+        public async Task<ActionResult> UpdateProduct(int id,[FromForm] ProductCreateDto productCreateDto)
         {
             var productFromRepo = repository.GetById(x => x.Id == id);
 
@@ -110,13 +110,16 @@ namespace VUTProjectApp.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(int id)
         {            
-            var productFromRepo = repository.GetById(x => x.Id == id, y => y.Category);
+            var productFromRepo = repository.GetById(x => x.Id == id, y => y.Category).Result;
             if(productFromRepo == null)
             {
                 return NotFound();
             }
-            await fileStorage.DeleteFile(productFromRepo.Result.Image, containerName);
-            repository.Delete(productFromRepo.Result);
+            if(productFromRepo.Image != null)
+            {
+                await fileStorage.DeleteFile(productFromRepo.Image, containerName);
+            }            
+            repository.Delete(productFromRepo);
             repository.SaveChangesAsync();
             return NoContent();
         }

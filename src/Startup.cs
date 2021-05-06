@@ -33,6 +33,13 @@ namespace VUTProjectApp
             services.AddTransient<IFileStorage, AzureStorage>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen();
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+              {
+                  policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+              });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
@@ -51,6 +58,7 @@ namespace VUTProjectApp
             });
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
