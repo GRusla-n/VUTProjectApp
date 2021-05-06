@@ -69,12 +69,13 @@ export default class ProductStore {
     this.loading = true;
     try {
       await agent.Products.update(product);
-      runInAction(() => {
+      runInAction(async () => {
+        var productFromRepo = await agent.Products.details(product.id);
         this.products = [
           ...this.products.filter((x) => x.id !== product.id),
-          product,
+          productFromRepo,
         ];
-        this.selectedProduct = product;
+        this.selectedProduct = productFromRepo;
         this.editMode = false;
         this.loading = false;
       });

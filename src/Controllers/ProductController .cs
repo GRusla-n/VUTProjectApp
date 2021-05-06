@@ -82,6 +82,7 @@ namespace VUTProjectApp.Controllers
         public async Task<ActionResult> UpdateProduct(int id,[FromForm] ProductCreateDto productCreateDto)
         {
             var productFromRepo = repository.GetById(x => x.Id == id);
+            mapper.Map(productCreateDto, productFromRepo.Result);
 
             if (productFromRepo == null)
             {
@@ -100,12 +101,11 @@ namespace VUTProjectApp.Controllers
                         await fileStorage.EditFile(content, extension, containerName, fileRoute);
                 }
             }
-
-                mapper.Map(productCreateDto, productFromRepo.Result);
+                
                 repository.Update(productFromRepo.Result);
                 repository.SaveChangesAsync();
-                return NoContent();
-            }
+            return CreatedAtRoute(nameof(GetProductById), new { productFromRepo.Result.Id}, productFromRepo.Result);
+        }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(int id)

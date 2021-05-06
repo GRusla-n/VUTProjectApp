@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Grid, Header } from 'semantic-ui-react';
+import { Button, Grid, Header, Modal } from 'semantic-ui-react';
 import ImageCropper from './imageCropper';
 import ImageDropzone from './imageDropzone';
 
@@ -11,6 +11,7 @@ interface Props {
 export default function ImageUpload({ loading, uploadImage }: Props) {
   const [file, setFile] = useState<any>([]);
   const [cropper, setCropper] = useState<Cropper>();
+  const [open, setOpen] = useState(false);
 
   function onCrop() {
     if (cropper) {
@@ -25,51 +26,57 @@ export default function ImageUpload({ loading, uploadImage }: Props) {
   }, [file]);
 
   return (
-    <Grid>
-      <Grid.Row>
-        <Grid.Column width={4}>
-          <Header sub color="teal" content="Step #1 - Add Photo" />
-          <ImageDropzone setFile={setFile} />
-        </Grid.Column>
-        <Grid.Column width={1} />
-        <Grid.Column width={4}>
-          <Header sub color="teal" content="Step #2 - Add Photo" />
-          {file && file.length > 0 && (
-            <ImageCropper
-              setCropper={setCropper}
-              imagePreview={file[0].preview}
-            />
-          )}
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column width={1} />
-        <Grid.Column width={4}>
-          <Header sub color="teal" content="Step #2 - Add Photo" />
-          {file && file.length > 0 && (
-            <>
+    <Modal
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+      open={open}
+      trigger={<Button type="button">Show Modal</Button>}
+    >
+      <Modal.Header>Select a Image</Modal.Header>
+      <Modal.Content>
+        <Grid>
+          <Grid.Column width={4}>
+            <Header sub color="teal" content="Step #1 - Add Photo" />
+            <ImageDropzone setFile={setFile} />
+          </Grid.Column>
+          <Grid.Column width={1} />
+          <Grid.Column width={4}>
+            <Header sub color="teal" content="Step #2 - Add Photo" />
+            {file && file.length > 0 && (
+              <ImageCropper
+                setCropper={setCropper}
+                imagePreview={file[0].preview}
+              />
+            )}
+          </Grid.Column>
+          <Grid.Column width={1} />
+          <Grid.Column width={4}>
+            <Header sub color="teal" content="Step #2 - Add Photo" />
+            {file && file.length > 0 && (
               <div
                 className="img-preview"
-                style={{ minHeight: 100, overflow: 'hidden' }}
+                style={{ minHeight: 200, overflow: 'hidden' }}
               />
-              <Button.Group>
-                <Button
-                  loading={loading}
-                  onClick={onCrop}
-                  positive
-                  icon="check"
-                  type="button"
-                />
-                <Button
-                  disabled={loading}
-                  onClick={() => setFile([])}
-                  icon="close"
-                />
-              </Button.Group>
-            </>
-          )}
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+            )}
+          </Grid.Column>
+        </Grid>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button
+          loading={loading}
+          // eslint-disable-next-line no-sequences
+          onClick={() => (onCrop(), setOpen(false))}
+          positive
+          icon="check"
+          type="button"
+        />
+        <Button
+          disabled={loading}
+          // eslint-disable-next-line no-sequences
+          onClick={() => (setFile([]), setOpen(false))}
+          icon="close"
+        />
+      </Modal.Actions>
+    </Modal>
   );
 }

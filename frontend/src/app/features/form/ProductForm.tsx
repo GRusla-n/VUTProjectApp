@@ -1,7 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Form, Segment } from 'semantic-ui-react';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useStore } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
 import ImageUpload from '../../utils/imageUpload/imageUpload';
@@ -35,6 +33,7 @@ const ProductForm = () => {
         id: '',
         point: '',
         description: '',
+        productId: '',
       },
     ],
   };
@@ -67,7 +66,7 @@ const ProductForm = () => {
     <Segment clearing>
       <Form onSubmit={handleSubmit} autoComplete="off">
         <Container textAlign="right" style={{ marginBottom: '10px' }}>
-          <FontAwesomeIcon icon={faTimes} onClick={closeForm} />
+          <Button type="button" icon="close" onClick={closeForm} />
         </Container>
         <Form.Input
           placeholder="Name"

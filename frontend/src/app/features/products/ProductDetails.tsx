@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Image, Button } from 'semantic-ui-react';
 import { LoadingComponent } from '../../layout/LoadingComponents';
 import { useStore } from '../../stores/store';
+import { SyntheticEvent } from 'react-dom/node_modules/@types/react';
 
 export const ProductDetail = () => {
   const { productStore } = useStore();
   const {
     selectedProduct: product,
     openForm,
-    cancelSelectedProduct,
+    loading,
+    deleteProduct,
   } = productStore;
+  const [target, setTarget] = useState('');
+
+  const handleProductDelete = (
+    e: SyntheticEvent<HTMLButtonElement>,
+    id: string,
+  ) => {
+    setTarget(e.currentTarget.name);
+    deleteProduct(id);
+  };
 
   if (!product) return <LoadingComponent />;
 
@@ -25,12 +36,15 @@ export const ProductDetail = () => {
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths="2">
-          <Button onClick={() => openForm(product.id)} basic content="Edit" />
           <Button
-            onClick={() => cancelSelectedProduct()}
+            name={product.id}
+            loading={loading && target === product.id}
+            onClick={(e) => handleProductDelete(e, product.id)}
+            floated="right"
+            content="Delete"
             basic
-            content="Cancel"
           />
+          <Button onClick={() => openForm(product.id)} content="Edit" />
         </Button.Group>
       </Card.Content>
     </Card>

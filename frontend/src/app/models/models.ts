@@ -12,6 +12,7 @@ export interface Rating {
   id: string;
   point: string;
   description: string;
+  productId: string;
 }
 
 export interface Product {

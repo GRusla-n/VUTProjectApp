@@ -20,7 +20,8 @@ namespace VUTProjectApp.Services
         public async Task<string> EditFile(MemoryStream content, string extension, string containerName, string fileRoute)
         {
             await DeleteFile(fileRoute, containerName);
-            return await SaveFile(content, extension, containerName);
+            var url =  await SaveFile(content, extension, containerName);
+            return url;
 
         }
 
